@@ -14,14 +14,20 @@ require(["src/Game"], function(Game) {
             canvas.scale = 2;
 
             content.load("back", "res/back.png");
-            content.load("blocks", "res/blocks.png")
-            content.load("numbers.png", "res/numbers.png")
+            content.load("blocks", "res/blocks.png");
+            content.load("numbers.png", "res/numbers.png");
+
+            this.hasLoad = false;
         },
 
         tick: function() {
-            console.log("test");
-            if (content.progress() === 1) {
-                canvas.ctx.drawImage(content.get("back"), 0, 0);
+            if (this.hasLoad) {
+
+            } else {
+                this.hasLoad = content.progress() === 1;
+                if (this.hasLoad) {
+                    this.tetris = new Tetris();
+                }
             }
         }
     });

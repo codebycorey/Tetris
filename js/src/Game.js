@@ -1,4 +1,13 @@
 define(function() {
+    var vendors = ["o", "ms", "moz", "webkit"];
+    for (var i = vendors.length; i-- && !window.requestAnimationFrame;) {
+        var v = vendors[i];
+
+        window.requestAnimationFrame = window[v + "RequestAnimationFrame"];
+        window.cancelAnimationFrame = window[v + "CancelAnimationFrame"] ||
+                                      window[v + "CancelRequestAnimationFrame"];
+    }
+
     var Game = Class.extend({
         tick: function() {
             console.warn("should overrided by childclass!");
