@@ -15,8 +15,8 @@ require(["src/Game"], function(Game) {
         }
     });
 
-    window.onload = function() {
+    (function() {
         var game = new App();
         game.run();
-    }
+    })();
 })
