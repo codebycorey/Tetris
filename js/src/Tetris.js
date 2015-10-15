@@ -14,6 +14,17 @@ define(["src/Numfont"], function(Numfont) {
                 yellow: new Numfont(num, 54, 9),
                 purple: new Numfont(num, 63, 9)
             }
+            this.data = {
+                L: 0,
+                I: 0,
+                T: 0,
+                S: 0,
+                Z: 0,
+                O: 0,
+                J: 0,
+
+                TOT: 0,
+            }
         },
         handleInputs: function(input) {
 
@@ -23,7 +34,16 @@ define(["src/Numfont"], function(Numfont) {
         },
         draw: function(ctx) {
             ctx.drawImage(this.back, 0 ,0);
-            this.font.gray.draw(ctx, 42, 10, 10, 5);
+
+            this.font.orange.draw(ctx, this.data.L, 432, 52, 5);
+            this.font.cyan.draw  (ctx, this.data.I, 432, 76, 5);
+            this.font.purple.draw(ctx, this.data.T, 432, 100, 5);
+            this.font.green.draw (ctx, this.data.S, 432, 124, 5);
+            this.font.red.draw   (ctx, this.data.Z, 432, 148, 5);
+            this.font.yellow.draw(ctx, this.data.O, 432, 172, 5);
+            this.font.blue.draw  (ctx, this.data.J, 432, 196, 5);
+
+            this.font.gray.draw(ctx, this.data.TOT, 425, 221, 6);
         }
     });
 
