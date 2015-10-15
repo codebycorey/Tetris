@@ -1,12 +1,22 @@
-console.log("test");
+requirejs.config({
+    baseUrl: "js",
 
-canvas.width = 100;
-canvas.scale = 2;
+    paths: {
+        src: "./src"
+    }
+});
 
-var c = canvas.ctx;
+require(["src/Game"], function(Game) {
+    var App = Game.extend({
+        init: function() {
+            canvas.width = 200;
+            canvas.height = 100;
+            canvas.scale = 2;
+        }
+    });
 
-c.beginPath();
-c.arc(10, 10, 5, 0, 7);
-c.fill();
-
-canvas.flip();
+    window.onload = function() {
+        var game = new App();
+        game.run();
+    }
+})

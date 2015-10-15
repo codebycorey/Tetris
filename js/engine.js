@@ -1,5 +1,3 @@
-
-
 var canvas, input, content;
 (function() {
     canvas = (function() {
