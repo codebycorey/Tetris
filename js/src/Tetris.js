@@ -4,11 +4,10 @@ define(["src/GameBoard", "src/StatManager"], function(GameBoard, StatManager) {
             this.gameBoard = new GameBoard();
             this.stat = new StatManager();
         },
-        handleInputs: function(input) {
-
-        },
-        update: function() {
-
+        update: function(input) {
+            if (input.pressed("space")) {
+                console.log("spacebar test");
+            }
         },
         draw: function(ctx) {
             this.gameBoard.draw(ctx, this.stat);

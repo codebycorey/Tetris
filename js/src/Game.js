@@ -28,6 +28,7 @@ define(function() {
                 self.reqframe = window.requestAnimationFrame(loop);
                 self.tick();
 
+                input.clearPressed();
                 canvas.flip();
             }
             this.reqframe = window.requestAnimationFrame(loop);
