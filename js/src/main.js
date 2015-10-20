@@ -18,10 +18,10 @@ require(["src/Game", "src/Tetris"], function(Game, Tetris) {
             content.load("numbers", "res/numbers.png");
 
             input.bindKey("space", input.Keys.SPACE);
-            input.bindKey("left", input.Keys.LEFT_ARROW);
-            input.bindKey("up", input.Keys.UP_ARROW);
-            input.bindKey("right", input.Keys.RIGHT_ARROW);
-            input.bindKey("down", input.Keys.DOWN_ARROW);
+            input.bindKey("left", [input.Keys.LEFT_ARROW, input.Keys.A]);
+            input.bindKey("up", [input.Keys.UP_ARROW, input.Keys.W]);
+            input.bindKey("right", [input.Keys.RIGHT_ARROW, input.Keys.D]);
+            input.bindKey("down", [input.Keys.DOWN_ARROW, input.Keys.S]);
 
             this.hasLoad = false;
         },
