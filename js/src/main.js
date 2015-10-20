@@ -46,4 +46,4 @@ require(["src/Game", "src/Tetris"], function(Game, Tetris) {
         window.onblur = game.stop.bind(game);
         window.onfocus = game.run.bind(game);
     })();
-})
+});

@@ -12,6 +12,8 @@ define(["src/GameBoard", "src/StatManager", "src/Tetramino", "src/Block"], funct
             this.reset();
         },
         reset: function() {
+            this.frames = 1;
+
             this.blockControl = [];
             for (var i = 0; i < this.cols; i++) {
                 this.blockControl[i] = [];
@@ -19,14 +21,20 @@ define(["src/GameBoard", "src/StatManager", "src/Tetramino", "src/Block"], funct
                     this.blockControl[i][j] = new Block(Block.NONE);
                 }
             }
-            var tetramino = new Tetramino(Tetramino.Z);
-            tetramino.x = 3;
-            tetramino.setTo(this.blockControl);
+
+            this.currentTetramino = new Tetramino(Tetramino.Z);
+            this.currentTetramino.x = 3;
+            this.currentTetramino.setTo(this.blockControl);
         },
+
         update: function(input) {
-            if (input.pressed("space")) {
-                console.log("spacebar test");
+            this.currentTetramino.setTo(this.blockControl, Block.NONE);
+
+            if (this.frames++ % 20 === 0) {
+                this.moveDown();
             }
+
+            this.currentTetramino.setTo(this.blockControl)
         },
         draw: function(ctx) {
             this.gameBoard.draw(ctx, this.stat);
@@ -38,6 +46,14 @@ define(["src/GameBoard", "src/StatManager", "src/Tetramino", "src/Block"], funct
                         this.gameBoard.drawBlock(ctx, b, i, j);
                     }
                 }
+            }
+        },
+        moveDown: function() {
+            var bc = this.blockControl,
+                ct = this.currentTetramino;
+
+            if (ct.check(bc, 0 , 1)) {
+                ct.y += 1;
             }
         }
     });
