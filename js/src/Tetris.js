@@ -34,7 +34,7 @@ define(["src/GameBoard", "src/StatManager", "src/Tetramino", "src/Block"], funct
                 this.moveDown();
             }
 
-            this.currentTetramino.setTo(this.blockControl)
+            this.currentTetramino.setTo(this.blockControl);
         },
         draw: function(ctx) {
             this.gameBoard.draw(ctx, this.stat);

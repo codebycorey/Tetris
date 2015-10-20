@@ -13,9 +13,9 @@ define(function() {
                 O: 0,
                 J: 0,
                 tot: 0
-            }
+            };
         },
-        
+
         incTetramino: function(id) {
             this.tetraminos[id] += 1;
             this.tetraminos.tot += 1;

@@ -18,7 +18,7 @@ var canvas, content, input;
             fctx.drawImage(this.view, 0, 0, fw, fh);
 
             this.ctx.clearRect(0, 0, vw, vh);
-        }
+        };
 
         Object.defineProperty(c, "width", {
             set: function(w) {
@@ -46,7 +46,7 @@ var canvas, content, input;
                 fw = this.frame.width = vw * s;
                 fh = this.frame.height = vh * s;
 
-                fctx["imageSmoothingEnabled"] = false;
+                fctx.imageSmoothingEnabled = false;
                 ["o", "ms", "moz", "webkit"].forEach(function(v) {
                     fctx[v + "imageSmoothingEnabled"] = false;
                 });
@@ -68,11 +68,11 @@ var canvas, content, input;
 
         c.get = function(name) {
             return files[name];
-        }
+        };
 
         c.progress = function() {
             return loadcount/filecount;
-        }
+        };
 
         c.load = function(name, src) {
             src = src || name;
@@ -85,7 +85,7 @@ var canvas, content, input;
                     var img = new Image();
                     img.onload = function() {
                         loadcount++;
-                    }
+                    };
                     img.src = src;
                     files[name] = img;
                     break;
@@ -99,7 +99,7 @@ var canvas, content, input;
                 case "tmx":
                     break;
             }
-        }
+        };
 
         return c;
     })();
@@ -118,7 +118,7 @@ var canvas, content, input;
             LEFT: -1,
             MIDDLE: -2,
             RIGHT: -3
-        }
+        };
 
         var Keys = {
             SPACE: 32,
@@ -126,7 +126,7 @@ var canvas, content, input;
             UP_ARROW: 38,
             RIGHT_ARROW: 39,
             DOWN_ARROW: 40,
-        }
+        };
 
         for (var ch = 65; ch <= 90; ch++) {
             Keys[String.fromCharCode(ch)] = ch;
@@ -141,7 +141,7 @@ var canvas, content, input;
             for (var i = 0; i < keys.length; i++) {
                 bindings[keys[i]] = action;
             }
-        }
+        };
 
         function getCode(e) {
             var t = e.type;
@@ -187,7 +187,7 @@ var canvas, content, input;
             do {
                 ox += el.offsetLeft;
                 oy += el.offsetTop;
-            } while (el = el.parentOffset);
+            } while (el == el.parentOffset);
 
             mouse.x = e.clientX - ox;
             mouse.y = e.clientY - oy;
@@ -201,19 +201,19 @@ var canvas, content, input;
             }
             pressed = {};
             released = [];
-        }
+        };
 
         i.pressed = function(action) {
             return pressed[action];
-        }
+        };
 
         i.down = function(action) {
                 return down[action];
-        }
+        };
 
         i.released = function(action) {
             return released.indexOf(action) >= 0;
-        }
+        };
 
         canvas.frame.onmousedown = ondown;
         canvas.frame.onmouseup = onup;

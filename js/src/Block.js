@@ -8,7 +8,7 @@ define(function() {
         S: 5,
         O: 6,
         T: 7
-    }
+    };
 
     var Block = Class.extend({
         init: function(id) {

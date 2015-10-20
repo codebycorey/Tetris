@@ -7,7 +7,7 @@ define(function() {
         Z: "110 011 000",
         O: "110 110 000",
         J: "111 001 000",
-    }
+    };
 
     var IDs = [];
     for (var sd in ShapeDef) {
