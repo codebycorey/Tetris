@@ -14,11 +14,22 @@ define(function() {
                 J: 0,
                 tot: 0
             };
+
+            this.lines = 0;
+            this.lvl = 0;
+            this.score = 0;
         },
 
         incTetramino: function(id) {
             this.tetraminos[id] += 1;
             this.tetraminos.tot += 1;
+        },
+
+        addScore: function(cleared) {
+
+        },
+        checkLvlUp: function() {
+
         }
     });
 
