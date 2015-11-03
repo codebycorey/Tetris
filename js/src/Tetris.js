@@ -22,13 +22,24 @@ define(["src/GameBoard", "src/StatManager", "src/Tetramino", "src/Block"], funct
                 }
             }
 
-            this.currentTetramino = new Tetramino(Tetramino.Z);
-            this.currentTetramino.x = 3;
-            this.currentTetramino.setTo(this.blockControl);
+            this.setNextTetramino();
         },
 
         update: function(input) {
             this.currentTetramino.setTo(this.blockControl, Block.NONE);
+
+            if (input.pressed("up")) {
+                this.moveRotate();
+            }
+            if (input.pressed("down")) {
+                this.moveDown();
+            }
+            if (input.pressed("left")) {
+                this.moveLeft();
+            }
+            if (input.pressed("right")) {
+                this.moveRight();
+            }
 
             if (this.frames++ % 20 === 0) {
                 this.moveDown();
@@ -48,12 +59,51 @@ define(["src/GameBoard", "src/StatManager", "src/Tetramino", "src/Block"], funct
                 }
             }
         },
+
+        setNextTetramino: function() {
+            this.currentTetramino = new Tetramino(Tetramino.Z);
+            this.currentTetramino.x = 3;
+            this.currentTetramino.y = 0;
+            this.stat.incTetramino(this.currentTetramino.ID);
+        },
+
+        moveLeft: function() {
+            var bc = this.blockControl,
+                ct = this.currentTetramino;
+
+            if (ct.check(bc, -1 , 0)) {
+                ct.x -= 1;
+            }
+        },
+
+        moveRight: function() {
+            var bc = this.blockControl,
+                ct = this.currentTetramino;
+
+            if (ct.check(bc, 1 , 0)) {
+                ct.x += 1;
+            }
+        },
+
+        moveRotate: function(dr) {
+            dr = dr || 1;
+            var bc = this.blockControl,
+                ct = this.currentTetramino;
+
+            if (ct.check(bc, 0 , 0, dr)) {
+                ct.rotation = ct.getRotation(dr);
+            }
+        },
+
         moveDown: function() {
             var bc = this.blockControl,
                 ct = this.currentTetramino;
 
             if (ct.check(bc, 0 , 1)) {
                 ct.y += 1;
+            } else {
+                ct.setTo(bc);
+                this.setNextTetramino();
             }
         }
     });

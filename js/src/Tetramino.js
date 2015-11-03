@@ -96,7 +96,7 @@ define(function() {
             var r = this.rotation,
                 l = this.shapes.length;
             if (dr > 0) {
-                return (r + 1) %1;
+                return (r + 1) % l;
             } else {
                 return r -1 >= 0 ? r -1 : l -1;
             }
