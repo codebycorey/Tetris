@@ -3,7 +3,7 @@ define(function() {
         init: function() {
             this.reset(0);
         },
-        reset: function() {
+        reset: function(startlvl) {
             this.tetraminos = {
                 L: 0,
                 I: 0,
@@ -15,8 +15,12 @@ define(function() {
                 tot: 0
             };
 
+            this.firstlvl = false;
+
+            this.startlvl = startlvl || 0;
+            this.lvl = this.startlvl;
+
             this.lines = 0;
-            this.lvl = 0;
             this.score = 0;
         },
 
@@ -26,10 +30,21 @@ define(function() {
         },
 
         addScore: function(cleared) {
-
+            var p = [0, 40, 100, 300, 1200][cleared];
+            this.score += (this.lvl + 1) * p;
         },
-        checkLvlUp: function() {
 
+        checkLvlUp: function() {
+            if (this.firstlvl) {
+                if(this.lines >= (this.lvl + 1) * 10) {
+                    this.lvl++;
+                }
+            } else {
+                if (this.lines >= (this.startlvl +1) * 10 || 100) {
+                    this.firstlvl = true;
+                    this.lvl++;
+                }
+            }
         }
     });
 

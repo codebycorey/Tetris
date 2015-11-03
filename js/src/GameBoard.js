@@ -22,6 +22,10 @@ define(["src/Numfont"], function(Numfont) {
 
             ctx.drawImage(this.back, 0 ,0);
 
+            this.font.gray.draw(ctx, stat.lvl, 113, 16, 5);
+            this.font.gray.draw(ctx, stat.lines, 113, 33, 5);
+            this.font.gray.draw(ctx, stat.score, 78, 52, 10);
+
             this.font.orange.draw(ctx, tetris.L, 432, 52, 5);
             this.font.cyan.draw  (ctx, tetris.I, 432, 76, 5);
             this.font.purple.draw(ctx, tetris.T, 432, 100, 5);

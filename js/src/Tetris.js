@@ -1,4 +1,4 @@
-define(["src/GameBoard", "src/StatManager", "src/Tetramino", "src/Block"], function(GameBoard, StatManager, Tetramino, Block) {
+define(["src/GameBoard", "src/StatManager", "src/Tetramino", "src/Block", "src/Randomizer"], function(GameBoard, StatManager, Tetramino, Block, Randomizer) {
     var Tetris = Class.extend({
         init: function(cols, rows) {
             this.cols = cols;
@@ -6,6 +6,7 @@ define(["src/GameBoard", "src/StatManager", "src/Tetramino", "src/Block"], funct
 
             this.gameBoard = new GameBoard();
             this.stat = new StatManager();
+            this.random = new Randomizer();
 
             this.blockControl = [];
 
@@ -22,6 +23,7 @@ define(["src/GameBoard", "src/StatManager", "src/Tetramino", "src/Block"], funct
                 }
             }
 
+            this.random.initialize();
             this.setNextTetramino();
         },
 
@@ -39,6 +41,9 @@ define(["src/GameBoard", "src/StatManager", "src/Tetramino", "src/Block"], funct
             }
             if (input.pressed("right")) {
                 this.moveRight();
+            }
+            if (input.pressed("space")) {
+                this.hardDrop();
             }
 
             if (this.frames++ % 20 === 0) {
@@ -61,7 +66,7 @@ define(["src/GameBoard", "src/StatManager", "src/Tetramino", "src/Block"], funct
         },
 
         setNextTetramino: function() {
-            this.currentTetramino = new Tetramino(Tetramino.Z);
+            this.currentTetramino = new Tetramino(this.random.nextID());
             this.currentTetramino.x = 3;
             this.currentTetramino.y = 0;
             this.stat.incTetramino(this.currentTetramino.ID);
@@ -105,6 +110,24 @@ define(["src/GameBoard", "src/StatManager", "src/Tetramino", "src/Block"], funct
                 ct.setTo(bc);
                 this.checkRows();
                 this.setNextTetramino();
+            }
+        },
+
+        hardDrop: function() {
+            var bc = this.blockControl,
+                ct = this.currentTetramino;
+                move = true;
+
+            while (move) {
+                if (ct.check(bc, 0 , 1)) {
+                    ct.y += 1;
+                    this.stat.score += 2;
+                } else {
+                    move = false;
+                    ct.setTo(bc);
+                    this.checkRows();
+                    this.setNextTetramino();
+                }
             }
         },
 
