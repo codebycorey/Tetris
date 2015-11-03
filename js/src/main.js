@@ -11,7 +11,7 @@ require(["src/Game", "src/Tetris"], function(Game, Tetris) {
         init: function() {
             canvas.width = 480;
             canvas.height = 272;
-            canvas.scale = 2;
+            canvas.scale =  Math.max(1, Math.floor(Math.min(window.innerWidth/canvas.width, window.innerHeight/canvas.height)));
 
             content.load("back", "res/back.png");
             content.load("blocks", "res/blocks.png");
@@ -30,6 +30,11 @@ require(["src/Game", "src/Tetris"], function(Game, Tetris) {
             if (this.hasLoad) {
                 this.tetris.update(input);
                 this.tetris.draw(canvas.ctx);
+
+                if (this.tetris.gameOver) {
+                    alert("Game Over:\n\n"+this.tetris.stat);
+                    this.tetris.reset(0);
+                }
             } else {
                 this.hasLoad = content.progress() === 1;
                 if (this.hasLoad) {

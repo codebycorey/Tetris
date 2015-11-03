@@ -1,18 +1,16 @@
 define(function() {
     var ShapeDef = {
-        L: "111 100 000",
+        L: "001 111 000",
         I: "0000 1111 0000 0000",
-        T: "111 010 000",
+        T: "010 111 000",
         S: "011 110 000",
         Z: "110 011 000",
-        O: "110 110 000",
-        J: "111 001 000",
+        O: "011 011 000",
+        J: "100 111 000",
     };
 
-    var IDs = [];
     for (var sd in ShapeDef) {
         ShapeDef[sd] = ShapeDef[sd].replace(/\s+/g, "");
-        IDs.push(sd);
     }
 
     var Tetramino = Class.extend({
@@ -52,6 +50,10 @@ define(function() {
             }
         },
 
+        getShape: function() {
+            return this.shapes[this.rotation];
+        },
+
         setTo: function(control, id) {
             id = id != null ? id : this.ID;
             var shape = this.shapes[this.rotation];
@@ -63,6 +65,20 @@ define(function() {
                     }
                 }
             }
+        },
+
+        setShadow: function(controls, id) {
+            var ct = this,
+                bc = controls,
+                dy = 0;
+
+            while (this.check(bc, 0, dy)) {
+                dy += 1;
+            }
+            dy -= 1;
+            this.y += dy;
+            this.setTo(bc, id, true);
+            this.y -= dy;
         },
 
         check: function(control, dx, dy, dr) {
@@ -90,6 +106,10 @@ define(function() {
 
             return true;
 
+        },
+
+        rotate: function(dr) {
+            this.rotation = this.getRotation(dr);
         },
 
         getRotation: function(dr) {
@@ -121,8 +141,8 @@ define(function() {
         }
     });
 
-    for (var i = 0; i < IDs.length; i++) {
-        Tetramino[IDs[i]] = IDs[i];
+    for (var sh in ShapeDef) {
+        Tetramino[sh] = ShapeDef[sh];
     }
 
     return Tetramino;

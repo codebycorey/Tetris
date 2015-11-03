@@ -15,9 +15,14 @@ define(function() {
             this.setType(id || "none");
         },
 
-        setType: function(id) {
+        setType: function(id, shadow) {
             this.id = typeof id === "number" ? id : DrawIDs[id.toUpperCase()];
             this.solid = this.id !== DrawIDs.NONE;
+            if (shadow) {
+                this.solid = false;
+            }
+
+            this.shadow = shadow || false;
         }
     });
 

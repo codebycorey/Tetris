@@ -20,6 +20,13 @@ var canvas, content, input;
             this.ctx.clearRect(0, 0, vw, vh);
         };
 
+        c.scaleFit = function() {
+            var xs = Math.floor(window.innerWidth / this.width),
+                ys = Math.floor(window.innerHeight / this. height);
+
+            this.scale = Math.max(1, Math.min(xs, ys));
+        };
+
         Object.defineProperty(c, "width", {
             set: function(w) {
                 this.view.width = w;
@@ -143,11 +150,18 @@ var canvas, content, input;
             }
         };
 
+        var Types = {
+            keydown: 0,
+            keyup: 0,
+            mousedown: 1,
+            mouseup: 1
+        }
+
         function getCode(e) {
-            var t = e.type;
-            if (t === "keydown" || t === "keyup") {
+            var t = Types[e.type];
+            if (t === Types.keydown) {
                 return e.keyCode;
-            } else if (t === "mousedown" || t === "mouseup") {
+            } else if (t === Types.mousedown) {
                 switch (e.button) {
                     case 0:
                         return Buttons.LEFT;
@@ -181,8 +195,8 @@ var canvas, content, input;
         }
 
         function onmove(e) {
-            var el = e.target;
-                ox = 0;
+            var el = e.target,
+                ox = 0,
                 oy = 0;
             do {
                 ox += el.offsetLeft;

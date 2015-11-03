@@ -30,21 +30,28 @@ define(function() {
         },
 
         addScore: function(cleared) {
-            var p = [0, 40, 100, 300, 1200][cleared];
+            var p = [0, 40, 100, 300, 1200][cleared || 0];
             this.score += (this.lvl + 1) * p;
         },
 
         checkLvlUp: function() {
             if (this.firstlvl) {
-                if(this.lines >= (this.lvl + 1) * 10) {
+                if(this.lines >= (this.lvl * 10) + 10) {
                     this.lvl++;
                 }
-            } else {
-                if (this.lines >= (this.startlvl +1) * 10 || 100) {
+            } else if (this.lines >= (this.startlvl * 10) + 10 || this.lines >= 100) {
                     this.firstlvl = true;
                     this.lvl++;
-                }
             }
+        },
+
+        toString: function() {
+            var s = "";
+            s += "level: " + this.lvl + "\n";
+            s += "lines: " + this.lines + "\n";
+            s += "score: " + this.score;
+
+            return s;
         }
     });
 

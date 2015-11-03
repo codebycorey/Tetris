@@ -23,7 +23,7 @@ define(["src/Numfont"], function(Numfont) {
             ctx.drawImage(this.back, 0 ,0);
 
             this.font.gray.draw(ctx, stat.lvl, 113, 16, 5);
-            this.font.gray.draw(ctx, stat.lines, 113, 33, 5);
+            this.font.gray.draw(ctx, stat.lines, 113, 34, 5);
             this.font.gray.draw(ctx, stat.score, 78, 52, 10);
 
             this.font.orange.draw(ctx, tetris.L, 432, 52, 5);
@@ -37,14 +37,17 @@ define(["src/Numfont"], function(Numfont) {
             this.font.gray.draw(ctx, tetris.tot, 425, 221, 6);
         },
 
-        drawBlock : function(ctx, block, x, y) {
-            var id = block.id,
-                size = 13;
-
+        drawBlock : function(ctx, id, x, y, shadow) {
             x = 180 + x*12;
             y = 4 + y*12;
+            dy = shadow ? 13 : 0;
+            ctx.drawImage(this.blocks, id*12, 0, 13, 13, x, y, 13, 13);
+        },
 
-            ctx.drawImage(this.blocks, id*(size-1), 0, size, size, x, y, size, size);
+        drawNext: function(ctx, id, x, y) {
+            x = 100 + x*12;
+            y = 198 + y*12;
+            ctx.drawImage(this.blocks, id*12, 0, 13, 13, x, y, 13, 13);
         }
 
     });
