@@ -41,7 +41,7 @@ define(["src/Numfont"], function(Numfont) {
             x = 180 + x*12;
             y = 4 + y*12;
             dy = shadow ? 13 : 0;
-            ctx.drawImage(this.blocks, id*12, 0, 13, 13, x, y, 13, 13);
+            ctx.drawImage(this.blocks, id*12, dy, 13, 13, x, y, 13, 13);
         },
 
         drawNext: function(ctx, id, x, y) {

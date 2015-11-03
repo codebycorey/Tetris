@@ -109,7 +109,7 @@ define(["src/GameBoard", "src/StatManager", "src/Tetramino", "src/Block", "src/R
                 this.gameOver = true;
             }
 
-            this.currentTetramino = new Tetramino(this.random.nextID(), 3, 0);
+            this.currentTetramino = new Tetramino(this.next.ID, 3, 0);
             this.stat.incTetramino(this.currentTetramino.ID);
 
             this.next.setTo(this.nextBlock, Block.NONE);
