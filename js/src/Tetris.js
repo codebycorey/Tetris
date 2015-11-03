@@ -54,7 +54,7 @@ define(["src/GameBoard", "src/StatManager", "src/Tetramino", "src/Block", "src/R
 
         update: function(input) {
             this.currentTetramino.setTo(this.blockControl, Block.NONE);
-            // this.currentTetramino.setShadow(this.blockControl);
+            this.currentTetramino.setShadow(this.blockControl);
 
             if (input.pressed("up")) {
                 this.moveRotate();
@@ -90,7 +90,7 @@ define(["src/GameBoard", "src/StatManager", "src/Tetramino", "src/Block", "src/R
                     }
                     if (b.shadow) {
                         this.gameBoard.drawBlock(ctx, b.id, i, j, true);
-                        this.blockControls[i][j].setType(Block.NONE);
+                        this.blockControl[i][j].setType(Block.NONE);
                     }
                 }
             }

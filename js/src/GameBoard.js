@@ -38,15 +38,20 @@ define(["src/Numfont"], function(Numfont) {
         },
 
         drawBlock : function(ctx, id, x, y, shadow) {
-            x = 180 + x*12;
-            y = 4 + y*12;
-            dy = shadow ? 13 : 0;
-            ctx.drawImage(this.blocks, id*12, dy, 13, 13, x, y, 13, 13);
+            if (shadow) {
+                x = 180 + x*12;
+                y = 4 + y*12;
+                ctx.drawImage(this.blocks, id*12, 13, 13, 13, x, y, 13, 13);
+            } else {
+                x = 179 + x*12;
+                y = 3 + y*12;
+                ctx.drawImage(this.blocks, id*12, 0, 13, 13, x, y, 13, 13);
+            }
         },
 
         drawNext: function(ctx, id, x, y) {
-            x = 100 + x*12;
-            y = 198 + y*12;
+            x = 99 + x*12;
+            y = 197 + y*12;
             ctx.drawImage(this.blocks, id*12, 0, 13, 13, x, y, 13, 13);
         }
 

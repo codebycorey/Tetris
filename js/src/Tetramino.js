@@ -54,14 +54,15 @@ define(function() {
             return this.shapes[this.rotation];
         },
 
-        setTo: function(control, id) {
+        setTo: function(control, id, shadow) {
             id = id != null ? id : this.ID;
+            shadow = shadow | false;
             var shape = this.shapes[this.rotation];
 
             for (var i = 0; i < shape.length; i++) {
                 for (var j = 0; j < shape.length; j++) {
                     if (shape[j][i]) {
-                        control[this.x+i][this.y+j].setType(id);
+                        control[this.x+i][this.y+j].setType(id, shadow);
                     }
                 }
             }
